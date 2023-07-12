@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Soft Drink Products</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Soft Drink Products</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/list_users}">Customer List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/register}">Register customer</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class ="container">
+    <div class = "row">
+        <h1> List of Products </h1>
+    </div>
+
+    <div class = "row">
+        <div class = "col-lg-3">
+            <img src="drink.jpg">
+            <a th:href = "@{/Products/new}" class = "btn btn-primary btn-sm mb-3"> Add Product</a>
+        </div>
+    </div>
+    <table class = "table table-striped table-bordered">
+        <thead class = "table-dark">
+        <tr>
+            <th> Product Name</th>
+            <th> Product Description</th>
+            <th> Product Images </th>
+            <th> Product price </th>
+
+            <th> Actions </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each = "product: ${SoftDrinks}">
+            <td th:text = "${product.ProductName}"></td>
+            <td th:text = "${product.description}"></td>
+            <td><img  th:src = "@{${product.imageurlPath}}" /></td>
+            <td th:text = "${product.price}"></td>
+            <td>
+                <a th:href = "@{/products/edit/{id}(id=${product.id})}"
+                   class = "btn btn-primary">Update</a>
+
+                <a th:href = "@{/products/{id}(id=${product.id})}"
+                   class = "btn btn-danger">Delete</a>
+
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+</body>
+</html>
